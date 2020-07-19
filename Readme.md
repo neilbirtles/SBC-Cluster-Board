@@ -1,6 +1,6 @@
-#SBC Cluster Board
+# SBC Cluster Board
 
-##Overview
+## Overview
 
 From many years of building Single Board Computer (SBC) Clusters and the pain to all the cables and configuration that goes with it came the idea to make a cluster board that didnt need lots of cables or a seperate network switch to make it function. The SBC Cluster (SBC²) Board is the embodiment of that idea.
 
@@ -13,18 +13,18 @@ The slots for SBC have been spaced so that a single 120mm fan can cool them all 
 A single 5v 100W power supply (e.g. LRS-100-5) is all that is needed to comfortably run 5 SBC meaning that the only cables required for the complete cluster are 1 mains cable to the power supply, 2 wires for +5v and 0V DC to the SBC² and an optional 3 way cable to provide I2C comms back to a host device.
 
 
-##SBC² Components
+## SBC² Components
 
 There are a number of folders in this repository for the different components that make up the SBC². They are as follows
 
-#####PCB
+##### PCB
 
 This folder contains all the design files for the PCB, along with manufacturing information
 
-#####Firmware
+##### Firmware
 
 This folder contains the firmware that is flashed to the two microcontrollers that provide the control and monitoring functionality on the SBC²
 
-#####Frontend
+##### Frontend
 
 This folder contains a Flask and Bootstrap based web frontend that can be run on one of the SBC in the cluster to provide information about the SBC²
