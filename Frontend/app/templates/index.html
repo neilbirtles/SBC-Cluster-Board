@@ -1,0 +1,66 @@
+{% extends "basepage.html" %}
+
+{% block content %}
+{{super()}}
+<div class="container">
+   <div class="card border-primary mb-3">
+      <h5 class="card-header">SBC&#178; Board Power</h5>
+      <div class="card-body">
+         <h6 class="card-text text-muted">Supply Voltage: <span id="board_voltage">{{ board_voltage }}</span></h6>
+      </div>
+      <div class="table-responsive">
+         <table class="table">
+            <thead class="thead-light">
+               <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Slot 1</th>
+                  <th scope="col">Slot 2</th>
+                  <th scope="col">Slot 3</th>
+                  <th scope="col">Slot 4</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <th scope="row">Current</th>
+                  <td id="slot_1_current">{{ slot_1_current }}</td>
+                  <td id="slot_2_current">{{ slot_2_current }}</td>
+                  <td id="slot_3_current">{{ slot_3_current }}</td>
+                  <td id="slot_4_current">{{ slot_4_current }}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Power</th>
+                  <td id="slot_1_power">{{ slot_1_power }}</td>
+                  <td id="slot_2_power">{{ slot_2_power }}</td>
+                  <td id="slot_3_power">{{ slot_3_power }}</td>
+                  <td id="slot_4_power">{{ slot_4_power }}</td>
+              </tr>
+              <tr>
+                 <th scope="row"></th>
+                 <td><button type="button" class="btn btn-danger">Reset</button></td>
+                 <td><button type="button" class="btn btn-danger">Reset</button></td>
+                 <td><button type="button" class="btn btn-danger">Reset</button></td>
+                 <td><button type="button" class="btn btn-danger">Reset</button></td>
+              </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script>
+   setInterval(function(){
+      $.getJSON('/current_miner_info.json', function(data){
+         var items = [];
+         $.each( data, function( key, val ) {
+            if (document.getElementById(key)) {
+               document.getElementById(key).innerHTML=val;   
+            }
+         });
+      });
+   },5000);
+</script>
+{% endblock %}

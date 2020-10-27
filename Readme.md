@@ -2,20 +2,20 @@
 
 ## Overview
 
-From many years of building Single Board Computer (SBC) Clusters and the pain to all the cables and configuration that goes with it came the idea to make a cluster board that didnt need lots of cables or a seperate network switch to make it function. The SBC Cluster (SBC²) Board is the embodiment of that idea.
+From many years of building Single Board Computer (SBC) Clusters and the pain to all the cables and configuration that goes with it came the idea to make a cluster board that didn't need lots of cables or a separate network switch to make it function. The SBC Cluster (SBCï¿½) Board is the embodiment of that idea.
 
-The SBC² Board will allow 5 SBC to be powered and networked over their USB-C connection. The SBC² can provide up to 3.2A per port, with adjustable current limits to help limit damage in the event of any failures on the SBC themselves. Networking is provided through the use of USB gadget mode ethernet drivers that are standard in most linux kernels.
+The SBCï¿½ Board will allow 5 SBC to be powered and networked over their USB-C connection. The SBCï¿½ can provide up to 3.2A per port, with adjustable current limits to help limit damage in the event of any failures on the SBC themselves. Networking is provided through the use of USB gadget mode ethernet drivers that are standard in most Linux kernels.
 
-Optional monitoring of the state of the SBC² is achieved over an I2C connection to a host device. Configuration of the board is also possible over this link. A web frontend has been developed to make this a simple process without having to send arcane commands to specific registers on the I2C devices on the SBC².
+Optional monitoring of the state of the SBCï¿½ is achieved over an I2C connection to a host device. Configuration of the board is also possible over this link. A web frontend has been developed to make this a simple process without having to send arcane commands to specific registers on the I2C devices on the SBCï¿½.
 
-The slots for SBC have been spaced so that a single 120mm fan can cool them all removing the noise of 5 smaller fans. The SBC² provides a 12V step-up converter to power the fans from the proper voltage to ensure efficent cooling without the need for a second power supply.
+The slots for SBC have been spaced so that a single 120mm fan can cool them all removing the noise of 5 smaller fans. The SBCï¿½ provides a 12V step-up converter to power the fans from the proper voltage to ensure efficient cooling without the need for a second power supply.
 
-A single 5v 100W power supply (e.g. LRS-100-5) is all that is needed to comfortably run 5 SBC meaning that the only cables required for the complete cluster are 1 mains cable to the power supply, 2 wires for +5v and 0V DC to the SBC² and an optional 3 way cable to provide I2C comms back to a host device.
+A single 5v 100W power supply (e.g. LRS-100-5) is all that is needed to comfortably run 5 SBC meaning that the only cables required for the complete cluster are 1 mains cable to the power supply, 2 wires for +5v and 0V DC to the SBCï¿½ and an optional 3 way cable to provide I2C comms back to a host device.
 
 
-## SBC² Components
+## SBCï¿½ Components
 
-There are a number of folders in this repository for the different components that make up the SBC². They are as follows
+There are a number of folders in this repository for the different components that make up the SBCï¿½. They are as follows
 
 ##### PCB
 
@@ -23,8 +23,8 @@ This folder contains all the design files for the PCB, along with manufacturing 
 
 ##### Firmware
 
-This folder contains the firmware that is flashed to the two microcontrollers that provide the control and monitoring functionality on the SBC²
+This folder contains the firmware that is flashed to the two microcontrollers that provide the control and monitoring functionality on the SBCï¿½
 
 ##### Frontend
 
-This folder contains a Flask and Bootstrap based web frontend that can be run on one of the SBC in the cluster to provide information about the SBC²
+This folder contains a Flask and Bootstrap based web frontend that can be run on one of the SBC in the cluster to provide information about the SBCï¿½
