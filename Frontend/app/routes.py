@@ -1,9 +1,10 @@
-#import sys
+from time import sleep
 from flask import render_template
 from flask import jsonify
 from flask import request
 from app import app
 from .cfg import hubInterface
+from .cfg import usbHubInterface
 
 def index_contents_update():
    not_in_use_text = "Not In Use"
@@ -39,7 +40,7 @@ def index_contents_update():
 
    templateData = {
       'slot_1_current' : slot1_current,
-      'slot_2_current' : slot1_current,
+      'slot_2_current' : slot2_current,
       'slot_3_current' : slot3_current,
       'slot_4_current' : slot4_current,
       'slot_1_power' : slot1_power,
@@ -64,3 +65,14 @@ def current_hub_info():
 @app.route('/firmwareupdate')
 def firmwareupdate():
    return render_template('firmwareupdate.html')
+
+@app.route('/resetbutton.json', methods=['GET', 'POST'])
+def resetbutton():
+   if request.method == 'POST':
+      print("Performing hard reset for slot " + request.json['slot'])
+      #power cycle the requested slot 
+      usbHubInterface.change_power_state(int(request.json['slot']))
+      sleep(0.5)
+      usbHubInterface.change_power_state(int(request.json['slot']))
+   return "nothing"
+

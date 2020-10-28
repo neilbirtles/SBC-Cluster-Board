@@ -36,10 +36,10 @@
               </tr>
               <tr>
                  <th scope="row"></th>
-                 <td><button type="button" class="btn btn-danger">Reset</button></td>
-                 <td><button type="button" class="btn btn-danger">Reset</button></td>
-                 <td><button type="button" class="btn btn-danger">Reset</button></td>
-                 <td><button type="button" class="btn btn-danger">Reset</button></td>
+                 <td><button type="button" class="btn btn-danger" id="slot1_reset">Reset</button></td>
+                 <td><button type="button" class="btn btn-danger" id="slot2_reset">Reset</button></td>
+                 <td><button type="button" class="btn btn-danger" id="slot3_reset">Reset</button></td>
+                 <td><button type="button" class="btn btn-danger" id="slot4_reset">Reset</button></td>
               </tr>
             </tbody>
          </table>
@@ -62,5 +62,50 @@
          });
       });
    },5000);
+
+   $('#slot1_reset').click(function(){
+      $.ajax({
+         url: "/resetbutton.json",
+         type: "post",
+         data: JSON.stringify({'slot':"1"}, null, '\t'),
+         contentType: 'application/json;charset=UTF-8',
+         success: function(data) {
+            }
+      });
+   });
+
+   $('#slot2_reset').click(function(){
+      $.ajax({
+         url: "/resetbutton.json",
+         type: "post",
+         data: JSON.stringify({'slot':"2"}, null, '\t'),
+         contentType: 'application/json;charset=UTF-8',
+         success: function(data) {
+            }
+      });
+   });
+
+   $('#slot3_reset').click(function(){
+      $.ajax({
+         url: "/resetbutton.json",
+         type: "post",
+         data: JSON.stringify({'slot':"3"}, null, '\t'),
+         contentType: 'application/json;charset=UTF-8',
+         success: function(data) {
+            }
+      });
+   });
+
+   $('#slot4_reset').click(function(){
+      $.ajax({
+         url: "/resetbutton.json",
+         type: "post",
+         data: JSON.stringify({'slot':"4"}, null, '\t'),
+         contentType: 'application/json;charset=UTF-8',
+         success: function(data) {
+            }
+      });
+   });
+
 </script>
 {% endblock %}

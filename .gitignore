@@ -9,3 +9,4 @@ Firmware/SBC_Cluster_Controller.X/dist/default/*
 !Firmware/SBC_Cluster_Controller.X/dist/default/production
 Firmware/SBC_Cluster_Controller.X/dist/default/production/*
 !Firmware/SBC_Cluster_Controller.X/dist/default/production/SBC_Cluster_Controller.X.production.hex
+Firmware/SBC_Cluster_Controller.X/nbproject/private/*
