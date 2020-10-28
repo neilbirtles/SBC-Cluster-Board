@@ -28,6 +28,10 @@ class HubInterface:
    #Controller | Mains   | Mains       | Supply Voltage   | Supply Voltage
    #           | current | current     | LSB              | MSB
    #           | LSB     | MSB         |                  |
+   #----------------------------------------------------------------------
+   #           | 0x30    | 0x31        | 0x32             | 0x33
+   #           | Not     | Not         | Not              | Bootload
+   #           | used    | used        | used             | Flag 
 
    def __refresh_data_from_hub(self):
       #get voltage bytes from hub
@@ -100,12 +104,30 @@ class HubInterface:
    #TODO get the mains voltage as input figure not hard coded
    def get_mains_power(self):
       return self.__mains_current*230/1000
+   
+   def clear_prog_loaded_bootloader_flag(self):
+      #as this is going to end up resetting the controllers then pause the update scheduler for the moment
+      self.__scheduler.pause()
 
-   def __init__(self):
+      ctrl1_flag = wiringpi.wiringPiI2CReadReg8(self.__controller1,0x33)
+      ctlr2_flag = wiringpi.wiringPiI2CReadReg8(self.__controller2,0x33)
+      if  ctrl1_flag == 0x99 and ctlr2_flag == 0x99:
+         return True
+      else:
+         return False
+
+   def resume_after_firmware_update(self):
+      self.__link_to_controllers()
+      self.__scheduler.resume()
+
+   def __link_to_controllers(self):
       #do initial wiringpi library setup
       self.__wiringpisetup = wiringpi.wiringPiSetup()
       self.__controller1 = wiringpi.wiringPiI2CSetup(0x10)
       self.__controller2 = wiringpi.wiringPiI2CSetup(0x11)
+   
+   def __init__(self):
+      self.__link_to_controllers()
       #setup a scheduler to refresh data from the hub every 5 seconds
       self.__scheduler = BackgroundScheduler()
       self.__scheduler.add_job(self.__refresh_data_from_hub, 'interval', seconds=5)

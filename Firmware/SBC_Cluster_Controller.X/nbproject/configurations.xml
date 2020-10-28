@@ -23,6 +23,7 @@
       <itemPath>I2C_Slave_Interrupt_Handlers.h</itemPath>
       <itemPath>I2C_Master.h</itemPath>
       <itemPath>UCS2114_Driver.h</itemPath>
+      <itemPath>flash_routines.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -50,6 +51,7 @@
       <itemPath>I2C_Slave_Interrupt_Handlers.c</itemPath>
       <itemPath>I2C_Master.c</itemPath>
       <itemPath>UCS2114_Driver.c</itemPath>
+      <itemPath>flash_routines.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -86,7 +88,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>false</parseOnProdLoad>
+          <parseOnProdLoad>true</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
         <subordinates>

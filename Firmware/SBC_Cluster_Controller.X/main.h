@@ -18,7 +18,8 @@
  * port controller 2 [4 status bytes],
  * controller registers [4 status bytes]
  */
-volatile uint8_t g_port_controller_data[3][4] = {
+volatile uint8_t g_port_controller_data[4][4] = {
+    {0x00,0x00,0x00,0x00},
     {0x00,0x00,0x00,0x00},
     {0x00,0x00,0x00,0x00},
     {0x00,0x00,0x00,0x00}
@@ -27,7 +28,8 @@ volatile uint8_t g_port_controller_data[3][4] = {
 typedef enum{
     ucs2114_port1,
     ucs2114_port2,
-    controller_general
+    controller_general,
+    bootloader_ctrl
 }controller_data_rows;
 
 typedef enum{
@@ -44,6 +46,12 @@ typedef enum{
     supply_voltage_msb
 }controller_registers;
 
+typedef enum{
+    not_used_1,
+    not_used_2,
+    not_used_3,
+    clear_bootloader_prog_flag
+}bootloader_ctrl_registers;
 
 
 uint8_t volatile g_flash_freq = 200;
