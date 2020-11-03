@@ -1,10 +1,22 @@
 from time import sleep
+from shelljob import proc
+from pathlib import Path
 from flask import render_template
 from flask import jsonify
 from flask import request
+from flask import Response
+from flask import flash, url_for, redirect
+from werkzeug.utils import secure_filename
 from app import app
 from .cfg import hubInterface
 from .cfg import usbHubInterface
+import random
+import string
+import sys
+import os
+
+
+
 
 def index_contents_update():
    not_in_use_text = "Not In Use"
@@ -62,9 +74,24 @@ def index():
 def current_hub_info():
    return jsonify(index_contents_update())
 
-@app.route('/firmwareupdate')
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in {'hex'}
+
+@app.route('/firmwareupdate', methods=['GET', 'POST'])
 def firmwareupdate():
-   return render_template('firmwareupdate.html')
+   if request.method == 'POST':
+      # check if the post request has the file part, if not then its come from the complete button
+      if 'file' not in request.files:
+         return render_template('firmwareupdate.html')
+      #got a file name, so save the file local for flashing 
+      file = request.files['file']
+      if file and allowed_file(file.filename):
+         filename = secure_filename(file.filename)
+         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+         return render_template('firmwareupdate-progress.html', **{'filename':filename})
+   else:
+      return render_template('firmwareupdate.html')
 
 @app.route('/resetbutton.json', methods=['GET', 'POST'])
 def resetbutton():
@@ -75,4 +102,30 @@ def resetbutton():
       sleep(0.5)
       usbHubInterface.change_power_state(int(request.json['slot']))
    return "nothing"
+
+@app.route('/firmware_update_stream')
+def firmware_update_stream():
+
+   filename = os.path.join(app.config['UPLOAD_FOLDER'], request.args.get("filename"))
+   #give a short period to allow the file to be updloaded
+   escape_count = 0
+   while not Path(filename).is_file():
+      if escape_count > 5:
+         break
+      escape_count += 1
+      sleep(0.5)
+   
+   g = proc.Group()
+   p = g.run(["python3", os.path.join(app.config['UPLOAD_FOLDER'],"update_firmware.py"), "-H " + filename])
+
+   def read_process():
+      while g.is_pending():
+         lines = g.readlines()
+         for proc, line in lines:
+            yield "data:" + str(line, 'utf-8') + "\n\n"
+      
+      yield "data: finished\n\n"
+   
+   read_proc_op = read_process()
+   return Response(read_proc_op,mimetype='text/event-stream')
 

@@ -1,0 +1,42 @@
+{% extends "basepage.html" %}
+{% import "bootstrap/form.html" as wtf %}
+{% from 'bootstrap/form.html' import render_form_row %}
+
+{% block content %}
+<div class="container">
+   <div class="card border-primary mb-3">
+      <h5 class="card-header">SBC&#178; Board Firmware Update Progess</h5>
+      <div class="card-body">
+         <h6>Flashing Firmware Update from <span id="filename">{{filename}}</span></h6>
+         <div id="output"></div>
+      </div>
+      <div class="card-footer">
+         <form method=post enctype=multipart/form-data>
+            <button type="submit" class="btn btn-primary">Complete Update</button>
+         </form>
+      </div>
+   </div>
+</div>  
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+   if (!!window.EventSource){
+      var filename = document.getElementById("filename").innerHTML
+      var source = new EventSource("/firmware_update_stream?filename="+filename);
+      source.onmessage = function(event){
+         if (event.data != "finished") {
+         document.getElementById("output").innerHTML+=event.data+"<br/>"
+         console.log(event)
+         } else {
+            source.close()
+            console.log("closed stream")
+         }
+      }
+   } else {
+
+   }
+</script>
+
+{% endblock %}

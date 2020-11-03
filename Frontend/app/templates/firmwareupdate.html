@@ -4,7 +4,17 @@
 
 {% block content %}
 <div class="container">
-   <h4>Firmware Update</h4>
+   <div class="card border-primary mb-3">
+      <h5 class="card-header">SBC&#178; Board Firmware Update</h5>
+      <div class="card-body">
+         <form method=post enctype=multipart/form-data>
+            <div class="form-group">
+               <input type=file name=file class="form-control-file" id="fileNameSelect" placeholder="NewFirmware.hex">
+            </div>
+            <button type="submit" class="btn btn-primary">Flash Update</button>
+         </form>
+      </div>
+   </div>
 </div>  
 
 {% endblock %}

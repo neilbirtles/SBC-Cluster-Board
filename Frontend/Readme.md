@@ -22,7 +22,7 @@ Then install the required packages
 
 Then run the webserver with
 
-'python cryptominerwebapp.py'
+`python sbcclusterfrontend.py`
 
 The webserver can then be accessed from the web browser of any machine on the same network at the IP address of the machine on port 5000, i.e. 192.0.0.2:5000
 
