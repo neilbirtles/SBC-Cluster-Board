@@ -29,8 +29,9 @@ void I2C_SlaveWriteInterruptHandler(void)
     {
         //got special condition so clear the program loaded flag and reboot so can get to the bootloader
         erase_program_flag();
-        //write back 0x99 to ack the request to erase
-        I2C2_Write(0x99);
+        //write back 0xFF to ack the request to erase
+        I2C2_Write(0xFF);
+        __delay_ms(100);
         //reboot the device
         asm("RESET");
     }else{

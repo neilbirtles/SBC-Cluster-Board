@@ -2,7 +2,7 @@
 
 This software is a Flask / Bootstrap based webserver that interfaces with the SBC Cluster board and provides easy access to allow monitoring and control of the cluster board.
 
-This initial version provides monitoring of the supply voltage, current consumption and power for each of the slave boards and the ability to power cycle them. The ability to update the firmware in the miner is also provided. Future releases will provide the ability to set current limits for each SBC.
+This initial version provides monitoring of the supply voltage, current consumption and power for each of the slave boards and the ability to power cycle them. The ability to update the firmware in the cluster board is also provided. Future releases will provide the ability to set current limits for each SBC.
 
 ## Setup and Installation 
 

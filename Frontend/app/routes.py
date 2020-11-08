@@ -83,12 +83,16 @@ def firmwareupdate():
    if request.method == 'POST':
       # check if the post request has the file part, if not then its come from the complete button
       if 'file' not in request.files:
+         #restart hub after update
+         hubInterface.resume_after_firmware_update()
          return render_template('firmwareupdate.html')
       #got a file name, so save the file local for flashing 
       file = request.files['file']
       if file and allowed_file(file.filename):
          filename = secure_filename(file.filename)
          file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+         #mark hub for firmware update
+         hubInterface.clear_prog_loaded_bootloader_flag()
          return render_template('firmwareupdate-progress.html', **{'filename':filename})
    else:
       return render_template('firmwareupdate.html')
