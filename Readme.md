@@ -28,3 +28,8 @@ This folder contains the firmware that is flashed to the two microcontrollers th
 ##### Frontend
 
 This folder contains a Flask and Bootstrap based web frontend that can be run on one of the SBC in the cluster to provide information about and control over the SBC&#178;
+
+
+##### Cases and Accessories
+
+This folder contains the designs for the cases and accessories related to the SBC&#178;. 
